@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -9,36 +12,93 @@ android {
 
     defaultConfig {
         applicationId "com.example.weatherapp"
-        minSdk 24
+        minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
+        debug{
+            buildConfigField "String","BASE_URL","\"https://api.openweathermap.org\""
+            buildConfigField "String","API_KEY","\"3ccb48f76dc33bc6bc712e70f75cc6ff\""
+            buildConfigField "String","ICON_URL","\"https://openweathermap.org/img/wn/\""
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
+    }
+    buildFeatures {
+        buildConfig = true
+        dataBinding = true
+        viewBinding = true
     }
 }
 
 dependencies {
+    def nav_version = "2.6.0"
+
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'androidx.test.ext:junit-ktx:1.1.5'
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.fragment:fragment:1.1.0-alpha01'
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    // Retrofit with Gson Converter
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    //CardView
+    implementation "androidx.cardview:cardview:1.0.0"
+
+    //Hilt-DI
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-android-compiler:2.44")
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+
+    //Location
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.9.0'
+    testImplementation "com.google.truth:truth:1.1.4"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.2"
+    testImplementation "androidx.test:core-ktx:1.5.0"
+    testImplementation "org.robolectric:robolectric:4.10.3"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1"
+
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation "junit:junit:4.13.2"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.2"
+    debugImplementation "androidx.fragment:fragment-testing:1.5.7"
+    implementation "androidx.test:core:1.5.0"
+
+    androidTestImplementation "org.mockito:mockito-core:5.4.0"
+
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:2.28.3"
+
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:3.3.0"
+
 }

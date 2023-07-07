@@ -1,8 +1,11 @@
 package com.example.weatherapp
 
+import android.util.Log
+import com.example.weatherapp.util.GlobalVariable
 import org.junit.Test
 
 import org.junit.Assert.*
+import org.junit.Before as Before1
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -10,8 +13,14 @@ import org.junit.Assert.*
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class ExampleUnitTest {
+
+
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+
+      //  var expectedstr = "04:37 PM"
+       // var result1 = g.getCTime(1688620981,-18000)
+
+        assertEquals(4,2+2)
     }
 }
