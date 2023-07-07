@@ -6,7 +6,7 @@ import com.example.weatherapp.data.model.CityApiResponse
 import retrofit2.Response
 
 class RemoteDataSrcImpl(private val api: WeatherApiService) : RemoteDataSrc {
-    override suspend fun getGetWeatherDataByCityName(cityName:String): Response<CityApiResponse> {
+    override suspend fun getGetWeatherDataByCityName(cityName: String): Response<CityApiResponse> {
         return api.getWeatherByCityName(cityName)
     }
 
@@ -14,6 +14,6 @@ class RemoteDataSrcImpl(private val api: WeatherApiService) : RemoteDataSrc {
         lat: Double,
         lon: Double
     ): Response<CityApiResponse> {
-        return api.getWeatherByLatLon(lat,lon)
+        return api.getWeatherByLatLon(lat, lon)
     }
 }

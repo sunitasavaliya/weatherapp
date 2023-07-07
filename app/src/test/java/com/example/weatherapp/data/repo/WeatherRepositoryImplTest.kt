@@ -24,6 +24,7 @@ class WeatherRepositoryTest {
     // Class under test
     private lateinit var weatherRepository: WeatherRepository
     private lateinit var weatherRepository2: WeatherRepository
+
     private val remoteData: CityApiResponse = CityApiResponse(
         coord = Coord(-87.65, 41.85),
         weather = listOf(
@@ -121,6 +122,7 @@ class WeatherRepositoryTest {
 
         val response =
             weatherRepository2.getWeatherDataByLatLon(41.85, 645.565)
+
         // Then weather are loaded from the remote data source
         assertThat(response.data == null)
     }

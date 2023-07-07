@@ -17,10 +17,6 @@ class ExampleUnitTest {
 
     @Test
     fun addition_isCorrect() {
-
-      //  var expectedstr = "04:37 PM"
-       // var result1 = g.getCTime(1688620981,-18000)
-
         assertEquals(4,2+2)
     }
 }

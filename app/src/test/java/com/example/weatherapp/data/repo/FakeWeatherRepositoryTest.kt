@@ -11,7 +11,7 @@ import com.example.weatherapp.util.Resource
 
 class FakeWeatherRepositoryTest : WeatherRepository {
 
-    var weather = CityApiResponse(
+    private var weather = CityApiResponse(
         coord = Coord(-87.65, 41.85),
         weather = listOf(
             Weather(

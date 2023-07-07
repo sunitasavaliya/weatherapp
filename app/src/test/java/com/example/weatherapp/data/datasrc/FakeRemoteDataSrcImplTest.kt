@@ -5,7 +5,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.ResponseBody
 import retrofit2.Response
 
-class FakeRemoteDataSrcImplTest(var response: CityApiResponse?) : RemoteDataSrc {
+class FakeRemoteDataSrcImplTest(private var response: CityApiResponse?) : RemoteDataSrc {
     override suspend fun getGetWeatherDataByCityName(cityName: String): Response<CityApiResponse> {
         response?.let {
             return Response.success(response)

@@ -15,9 +15,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-/*
-    Here in getWeather() if have location permission On use lan lon api for very first time
-    In getWeather() if have not location permission On try API using last saved City
+/**
+ *   Here in getWeather() if have location permission On use lan lon api for very first time
+ *  In getWeather() if have not location permission On try API using last saved City
 */
 
 class WeatherViewModel(

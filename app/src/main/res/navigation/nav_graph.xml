@@ -9,7 +9,7 @@
         android:id="@+id/searchWeatherFragment"
         android:name="com.example.weatherapp.SearchWeatherFragment"
         android:label="Weather App"
-        tools:layout="@layout/fragment_search_weather" >
+        tools:layout="@layout/fragment_search_weather">
         <action
             android:id="@+id/action_searchWeatherFragment_to_weatherDetailFragment"
             app:destination="@id/weatherDetailFragment" />
@@ -18,7 +18,7 @@
         android:id="@+id/weatherDetailFragment"
         android:name="com.example.weatherapp.WeatherDetailFragment"
         android:label="Weather App"
-        tools:layout="@layout/fragment_weather_detail" >
+        tools:layout="@layout/fragment_weather_detail">
         <argument
             android:name="weatherdata"
             app:argType="com.example.weatherapp.data.model.CityApiResponse" />

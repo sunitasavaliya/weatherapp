@@ -67,13 +67,14 @@ class WeatherApiServiceTest {
             assertTrue(responseBody?.coord?.lat == 41.85 && responseBody?.coord?.lon == -87.65)
         }
     }
+
     @Test
     fun getWeatherByLatLon_sentRequest_receivedExpected() {
         runBlocking {
             // Prepare fake response
             enqueueMockResponse("cityresponse.json")
             //Send Request to the MockServer
-            val responseBody = service.getWeatherByLatLon(41.85,-87.65).body()
+            val responseBody = service.getWeatherByLatLon(41.85, -87.65).body()
             //Request received by the mock server
             val request = server.takeRequest()
 
@@ -88,7 +89,7 @@ class WeatherApiServiceTest {
             // Prepare fake response
             enqueueMockResponse("cityresponse.json")
             //Send Request to the MockServer
-            val responseBody = service.getWeatherByLatLon(41.85,-87.65).body()
+            val responseBody = service.getWeatherByLatLon(41.85, -87.65).body()
             //Request received by the mock server
             val request = server.takeRequest()
 

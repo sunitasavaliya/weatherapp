@@ -3,7 +3,6 @@ package com.example.weatherapp
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isChecked
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
@@ -21,7 +20,7 @@ import org.junit.runner.RunWith
 
 @MediumTest
 @RunWith(AndroidJUnit4::class)
-class WeatherDetailFragmentTest{
+class WeatherDetailFragmentTest {
     @Test
     fun selectedCityWeather_DisplayedInUi() {
         val cityWeatherData = CityApiResponse(
@@ -76,10 +75,10 @@ class WeatherDetailFragmentTest{
         onView(withId(R.id.tv_lowTemp)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_sunriseValue)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_sunsetValue)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_windValue)).check(matches(withText(cityWeatherData.wind.speed.toString()+" m/s")))
+        onView(withId(R.id.tv_windValue)).check(matches(withText(cityWeatherData.wind.speed.toString() + " m/s")))
         onView(withId(R.id.tv_feelslikeValue)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_humidityValue)).check(matches(withText(cityWeatherData.main.humidity.toString()+" %")))
-        onView(withId(R.id.tv_pressureValue)).check(matches(withText(cityWeatherData.main.pressure.toString()+" hPa")))
+        onView(withId(R.id.tv_humidityValue)).check(matches(withText(cityWeatherData.main.humidity.toString() + " %")))
+        onView(withId(R.id.tv_pressureValue)).check(matches(withText(cityWeatherData.main.pressure.toString() + " hPa")))
     }
 
 

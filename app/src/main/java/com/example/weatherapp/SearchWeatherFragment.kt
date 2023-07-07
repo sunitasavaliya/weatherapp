@@ -45,9 +45,13 @@ class SearchWeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSearchWeatherBinding.bind(view)
+
         viewModel = (activity as MainActivity).viewModel
+
         sharedPref = (activity as MainActivity).sharedPref
+
         binding.etCity.addTextChangedListener(textWatcher)
+
         viewModel.weather.postValue(Resource.Loading())
 
         binding.btSearch.setOnClickListener(View.OnClickListener {
@@ -60,6 +64,7 @@ class SearchWeatherFragment : Fragment() {
                 viewModel.isReadyToGetData.value = true
             }
         })
+
         binding.cvWeather.setOnClickListener(View.OnClickListener {
             val action = viewModel.currentWeather.value?.let { it1 ->
                 SearchWeatherFragmentDirections.actionSearchWeatherFragmentToWeatherDetailFragment(
@@ -70,6 +75,7 @@ class SearchWeatherFragment : Fragment() {
                 findNavController().navigate(action)
             }
         })
+
         viewModel.isReadyToGetData.observe(viewLifecycleOwner, Observer { flag ->
             if (flag) {
                 viewModel.getWeather()
@@ -126,27 +132,39 @@ class SearchWeatherFragment : Fragment() {
 
     private fun setUi(data: CityApiResponse) {
         showDataView()
+
         binding.tvCityName.text = data.name.trim()
-        val wetherCondition = data.weather.get(0).description.trim()
+
+        val weatherCondition = data.weather[0].description.trim()
+
         binding.tvTime.text = GlobalVariable.getTime(data.dt.toLong(), data.timezone)
-        binding.tvWeatherCondition.text =
-            wetherCondition.substring(0, 1).uppercase() + wetherCondition.substring(1)
+
+        binding.tvWeatherCondition.text = buildString {
+            append(weatherCondition.substring(0, 1).uppercase())
+            append(weatherCondition.substring(1))
+        }
+
         val circularProgressDrawable = CircularProgressDrawable(activity as MainActivity)
         circularProgressDrawable.strokeWidth = 5f
         circularProgressDrawable.centerRadius = 30f
         circularProgressDrawable.start()
+
         Glide.with(activity as MainActivity)
             .load(BuildConfig.ICON_URL + data.weather.get(0).icon.trim() + ".png")
             .placeholder(circularProgressDrawable)
+            //here used glide automatic cache mechanism for cache image
             .diskCacheStrategy(
                 DiskCacheStrategy.AUTOMATIC
             ).into(binding.ivIcon)
+
         binding.tvTemp.text =
             convertFahrenheitToCelsius(data.main.temp).toString() + getString(R.string.degree)
+
         binding.tvHighTemp.text = "H : " +
                 convertFahrenheitToCelsius(data.main.tempMax).toString() + getString(
             R.string.degree
         )
+
         binding.tvLowTemp.text = "L : " +
                 convertFahrenheitToCelsius(data.main.tempMin).toString() + getString(
             R.string.degree

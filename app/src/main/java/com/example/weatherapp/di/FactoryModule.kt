@@ -14,7 +14,10 @@ import javax.inject.Singleton
 class FactoryModule {
     @Singleton
     @Provides
-    fun getWeatherViewModelFactory(repository: WeatherRepository,application: Application):WeatherViewModelFactory{
-        return WeatherViewModelFactory(repository,application)
+    fun getWeatherViewModelFactory(
+        repository: WeatherRepository,
+        application: Application
+    ): WeatherViewModelFactory {
+        return WeatherViewModelFactory(repository, application)
     }
 }
