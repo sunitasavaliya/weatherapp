@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WeatherDetailFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_cityName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:text="San Jose"
+                android:layout_marginTop="20dp"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:text="80"
+                android:textSize="80sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_weatherCondition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:text="Sunny"
+                android:textSize="22sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/tv_highTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="H:59&#xb0;"
+                    android:textSize="20sp" />
+
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="8dp" />
+
+                <TextView
+                    android:id="@+id/tv_lowTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="L:59&#xb0;"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_weight="1"
+                    android:elevation="1dp"
+                    app:cardCornerRadius="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp">
+
+                        <TextView
+                            android:id="@+id/tv_sunrise"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:text="SUN RISE"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tv_sunriseValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_sunrise"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="8dp"
+                            android:text="07:00 am"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_weight="1"
+                    android:elevation="1dp"
+                    app:cardCornerRadius="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp">
+
+                        <TextView
+                            android:id="@+id/tv_sunset"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:text="SUNSET"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tv_sunsetValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_sunset"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="8dp"
+                            android:text="11:00 pm"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_weight="1"
+                    android:elevation="1dp"
+                    app:cardCornerRadius="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp">
+
+                        <TextView
+                            android:id="@+id/tv_wind"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:text="WIND"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tv_windValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_wind"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="8dp"
+                            android:text="14"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_weight="1"
+                    android:elevation="1dp"
+                    app:cardCornerRadius="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp">
+
+                        <TextView
+                            android:id="@+id/tv_feelslike"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:text="FEELS LIKE"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tv_feelslikeValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_feelslike"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="8dp"
+                            android:text="75"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_weight="1"
+                    android:elevation="1dp"
+                    app:cardCornerRadius="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp">
+
+                        <TextView
+                            android:id="@+id/tv_humidity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:text="HUMIDITY"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tv_humidityValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_humidity"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="8dp"
+                            android:text="35%"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_weight="1"
+                    android:elevation="1dp"
+                    app:cardCornerRadius="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp">
+
+                        <TextView
+                            android:id="@+id/tv_pressure"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:text="PRESSURE"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tv_pressureValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_pressure"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="8dp"
+                            android:text="29.53"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

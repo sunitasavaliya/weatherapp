@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SearchWeatherFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="16dp"
+        android:weightSum="5">
+
+        <EditText
+            android:id="@+id/etCity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:layout_gravity="center_vertical"
+            android:background="@android:color/transparent"
+            android:ems="10"
+            android:hint="@string/hint_city_name"
+            android:inputType="text"
+            android:maxLines="1"
+            android:minHeight="48dp"
+            android:text="" />
+
+        <View
+            android:layout_width="8dp"
+            android:layout_height="8dp" />
+
+        <ImageButton
+            android:id="@+id/bt_search"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/app_name"
+            android:src="@android:drawable/ic_search_category_default"
+            app:tint="@color/design_default_color_primary" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/dataView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_weather"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:elevation="1dp"
+            app:cardCornerRadius="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bg"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:id="@+id/ll_left"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_cityName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="San Jose"
+                        android:textSize="36sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="11pm"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_weatherCondition"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Cloudy"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_icon"
+                        android:layout_width="60dp"
+                        android:layout_height="65dp"
+                        android:layout_marginTop="8dp"
+                        android:padding="4dp" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/ll_left"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_temp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="4dp"
+                        android:text="80&#xb0;"
+                        android:textSize="55sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true">
+
+                        <TextView
+                            android:id="@+id/tv_highTemp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_marginTop="8dp"
+                            android:text="H:85&#xb0;"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tv_lowTemp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="L:59&#xb0;"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/noDataView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@android:drawable/ic_search_category_default" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/no_data"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/loadingView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="@dimen/progress_indicator_size"
+            android:layout_height="@dimen/progress_indicator_size"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+</LinearLayout>
