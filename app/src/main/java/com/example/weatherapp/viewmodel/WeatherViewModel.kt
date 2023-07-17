@@ -50,10 +50,10 @@ class WeatherViewModel(
                     }
                 }
             } catch (ex: Exception) {
-                weather.postValue(Resource.Error(ex.message.toString()))
+                weather.postValue(Resource.Error("Location Not Found"))
             }
         } else {
-            weather.postValue(Resource.Error("No Internet"))
+            weather.postValue(Resource.Error("Check Internet Connection"))
         }
     }
 

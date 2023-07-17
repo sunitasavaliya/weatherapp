@@ -96,7 +96,7 @@ class SearchWeatherFragment : Fragment() {
                 is Resource.Error -> {
                     showNoDataView()
                     res.message?.let {
-                        Toast.makeText(activity, "City not found", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, it, Toast.LENGTH_SHORT).show()
                     }
                 }
 
