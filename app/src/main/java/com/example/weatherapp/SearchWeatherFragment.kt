@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
@@ -30,9 +29,6 @@ class SearchWeatherFragment : Fragment() {
     private lateinit var binding: FragmentSearchWeatherBinding
     private lateinit var viewModel: WeatherViewModel
     private lateinit var sharedPref: SharedPreferences
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,9 +48,8 @@ class SearchWeatherFragment : Fragment() {
 
         binding.etCity.addTextChangedListener(textWatcher)
 
-        viewModel.weather.postValue(Resource.Loading())
 
-        binding.btSearch.setOnClickListener(View.OnClickListener {
+        binding.btSearch.setOnClickListener {
             if (binding.etCity.text.toString() == "") {
                 Toast.makeText(activity, "Fill the City Name ", Toast.LENGTH_SHORT).show()
             } else {
@@ -63,9 +58,9 @@ class SearchWeatherFragment : Fragment() {
                 viewModel.lon.value = 0.0
                 viewModel.isReadyToGetData.value = true
             }
-        })
+        }
 
-        binding.cvWeather.setOnClickListener(View.OnClickListener {
+        binding.cvWeather.setOnClickListener {
             val action = viewModel.currentWeather.value?.let { it1 ->
                 SearchWeatherFragmentDirections.actionSearchWeatherFragmentToWeatherDetailFragment(
                     it1
@@ -74,24 +69,24 @@ class SearchWeatherFragment : Fragment() {
             if (action != null) {
                 findNavController().navigate(action)
             }
-        })
+        }
 
-        viewModel.isReadyToGetData.observe(viewLifecycleOwner, Observer { flag ->
+        viewModel.isReadyToGetData.observe(viewLifecycleOwner) { flag ->
             if (flag) {
                 viewModel.getWeather()
             } else {
                 showNoDataView()
             }
-        })
+        }
 
-        viewModel.weather.observe(viewLifecycleOwner, Observer { res ->
+        viewModel.weather.observe(viewLifecycleOwner) { res ->
             hideSoftKeyboard()
             when (res) {
                 is Resource.Success -> {
                     if (res.data != null) {
                         viewModel.currentWeather.value = res.data
                         sharedPref.edit()?.putString(getString(R.string.saved_city), res.data.name)
-                            ?.commit()
+                            ?.apply()
                         setUi(res.data)
                     } else {
                         showNoDataView()
@@ -109,7 +104,7 @@ class SearchWeatherFragment : Fragment() {
                     showLoadingView()
                 }
             }
-        })
+        }
     }
 
     private fun showNoDataView() {
@@ -150,7 +145,7 @@ class SearchWeatherFragment : Fragment() {
         circularProgressDrawable.start()
 
         Glide.with(activity as MainActivity)
-            .load(BuildConfig.ICON_URL + data.weather.get(0).icon.trim() + ".png")
+            .load(BuildConfig.ICON_URL + data.weather[0].icon.trim() + ".png")
             .placeholder(circularProgressDrawable)
             //here used glide automatic cache mechanism for cache image
             .diskCacheStrategy(

@@ -8,19 +8,19 @@ import retrofit2.Response
 
 class WeatherRepositoryImpl(private val remoteDataSrc: RemoteDataSrc) : WeatherRepository {
     override suspend fun getWeatherDataByCityName(cityName: String): Resource<CityApiResponse> {
-        return responseToResource(remoteDataSrc.getGetWeatherDataByCityName(cityName));
+        return responseToResource(remoteDataSrc.getGetWeatherDataByCityName(cityName))
     }
 
     override suspend fun getWeatherDataByLatLon(
         lat: Double,
         lon: Double
     ): Resource<CityApiResponse> {
-        return responseToResource(remoteDataSrc.getGetWeatherDataByLatLon(lat, lon));
+        return responseToResource(remoteDataSrc.getGetWeatherDataByLatLon(lat, lon))
     }
 
     private fun responseToResource(response: Response<CityApiResponse>): Resource<CityApiResponse> {
         if (response.isSuccessful) {
-            response?.body()?.let {
+            response.body()?.let {
                 return Resource.Success(it)
             }
         }

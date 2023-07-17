@@ -15,9 +15,6 @@ class WeatherDetailFragment : Fragment() {
     private val args: WeatherDetailFragmentArgs by navArgs()
     private lateinit var binding: FragmentWeatherDetailBinding
     private lateinit var cityApiResponse: CityApiResponse
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

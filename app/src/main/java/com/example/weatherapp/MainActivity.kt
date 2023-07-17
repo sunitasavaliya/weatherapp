@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
@@ -17,7 +16,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.weatherapp.databinding.ActivityMainBinding
-import com.example.weatherapp.util.GlobalVariable
 import com.example.weatherapp.viewmodel.WeatherViewModel
 import com.example.weatherapp.viewmodel.WeatherViewModelFactory
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -25,7 +23,6 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.tasks.OnCompleteListener
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -38,21 +35,19 @@ class MainActivity : AppCompatActivity() {
     lateinit var factory: WeatherViewModelFactory
     private lateinit var binding: ActivityMainBinding
     private val permission =
-        arrayListOf<String>("android.permission.ACCESS_COARSE_LOCATION").toTypedArray()
+        arrayListOf("android.permission.ACCESS_COARSE_LOCATION").toTypedArray()
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     lateinit var sharedPref: SharedPreferences
-    lateinit var navHostFragment: NavHostFragment
-    lateinit var navController: NavController
+    private lateinit var navHostFragment: NavHostFragment
+    private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (GlobalVariable.isUserEnterFirstTime) {
-            requestPermission()
-            GlobalVariable.isUserEnterFirstTime = false
-        }
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this, factory)[WeatherViewModel::class.java]
-        navHostFragment = supportFragmentManager.findFragmentById(binding.fragmentContainerView.id) as NavHostFragment
+        navHostFragment =
+            supportFragmentManager.findFragmentById(binding.fragmentContainerView.id) as NavHostFragment
         navController = navHostFragment.findNavController()
         setupActionBarWithNavController(navController)
 
@@ -60,12 +55,13 @@ class MainActivity : AppCompatActivity() {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         // method to get the location
-        getLastLocation();
+        getLastLocation()
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
     @SuppressLint("MissingPermission")
     private fun getLastLocation() {
         // check if permissions are given
@@ -78,8 +74,8 @@ class MainActivity : AppCompatActivity() {
                 // location from
                 // FusedLocationClient
                 // object
-                fusedLocationClient.getLastLocation()
-                    .addOnCompleteListener(OnCompleteListener<Location?> { task ->
+                fusedLocationClient.lastLocation
+                    .addOnCompleteListener { task ->
                         val location = task.result
                         if (location == null) {
                             requestNewLocationData()
@@ -88,12 +84,17 @@ class MainActivity : AppCompatActivity() {
                             viewModel.lon.value = location.longitude
                             viewModel.isReadyToGetData.value = true
                         }
-                    })
+                    }
             }
         } else {
             // if permissions aren't available,
             // request for permissions
-            requestPermission()
+            if (viewModel.isUserEnteredFirstTime) {
+                requestPermission()
+                viewModel.isUserEnteredFirstTime = false
+            } else {
+                setData()
+            }
         }
     }
 
@@ -183,18 +184,22 @@ class MainActivity : AppCompatActivity() {
                     // At the same time, respect the user's decision. Don't link to
                     // system settings in an effort to convince the user to change
                     // their decision.
-                    val savedCity =
-                        sharedPref.getString(getString(R.string.saved_city), null)
-                    if (!savedCity.isNullOrEmpty()) {
-                        viewModel.cityName.value = savedCity.toString()
-                        viewModel.isReadyToGetData.value = true
-                    } else {
-                        viewModel.isReadyToGetData.value = false
-                    }
+                    setData()
                 }
                 return
             }
 
+        }
+    }
+
+    private fun setData() {
+        val savedCity =
+            sharedPref.getString(getString(R.string.saved_city), null)
+        if (!savedCity.isNullOrEmpty()) {
+            viewModel.cityName.value = savedCity.toString()
+            viewModel.isReadyToGetData.value = true
+        } else {
+            viewModel.isReadyToGetData.value = false
         }
     }
 }

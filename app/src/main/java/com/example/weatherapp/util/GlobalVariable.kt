@@ -11,7 +11,7 @@ class GlobalVariable {
         private val timeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("hh:mm a")
 
         //User Enter First Time
-        var isUserEnterFirstTime = false
+        //var isUserEnterFirstTime = false
 
         fun getTime(time: Long, timezone: Int): String {
             return ZonedDateTime.ofInstant(

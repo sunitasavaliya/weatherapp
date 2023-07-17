@@ -10,6 +10,6 @@ class WeatherViewModelFactory(
     private val application: Application
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return WeatherViewModel(repository, application) as T;
+        return WeatherViewModel(repository, application) as T
     }
 }

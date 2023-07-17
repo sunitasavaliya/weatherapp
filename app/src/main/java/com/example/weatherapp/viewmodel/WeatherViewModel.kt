@@ -31,10 +31,11 @@ class WeatherViewModel(
     val cityName: MutableLiveData<String> = MutableLiveData("")
     val currentWeather: MutableLiveData<CityApiResponse> = MutableLiveData()
     val isReadyToGetData: MutableLiveData<Boolean> = MutableLiveData(false)
-
+    var isUserEnteredFirstTime  = true
     fun getWeather() = viewModelScope.launch {
         if (isNetworkConnected(application)) {
             try {
+                weather.postValue(Resource.Loading())
                 withContext(Dispatchers.IO) {
                     if (lat.value != null && lat.value!! > 0.0 && lon.value != null && lat.value!! > 0.0) {
                         weather.postValue(
